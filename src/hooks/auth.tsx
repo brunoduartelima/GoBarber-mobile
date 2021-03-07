@@ -63,7 +63,7 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData);
             ['@GoBarber:user', JSON.stringify(user)]
         ]);
 
-        api.defaults.headers.authorization = `Bearer ${token}`;
+        api.defaults.headers.authorization = `Bearer ${token[1]}`;
 
         setData({ token, user });
     }, []);
