@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 import { getStatusBarHeight } from 'react-native-iphone-x-helper';
-import { FlatList } from 'react-native';
+import { FlatList, Platform } from 'react-native';
 import { Provider } from './index';
 import { RectButton } from 'react-native-gesture-handler';
 
@@ -10,7 +10,7 @@ export const Container = styled.View`
 
 export const Header = styled.View`
     padding: 24px;
-    padding-top: ${getStatusBarHeight() + 24}px;
+    padding-top: ${Platform.OS === 'ios' ? getStatusBarHeight() + 24 : 24}px;
     background: #28262e;
 
     flex-direction: row;
@@ -28,9 +28,7 @@ export const UserName = styled.Text`
     font-family: 'RobotoSlab-Medium';
 `;
 
-export const ProfileButton = styled.TouchableOpacity`
-
-`;
+export const ProfileButton = styled.TouchableOpacity``;
 
 export const UserAvatar = styled.Image`
     width: 56px;
@@ -39,12 +37,12 @@ export const UserAvatar = styled.Image`
 `;
 
 export const ProvidersList = styled(FlatList as new () => FlatList<Provider>)`
-    padding: 32px 24px 16px;
+    padding: 0 24px;
 `;
 
 export const ProvidersListTitle = styled.Text`
     font-size: 24px;
-    margin-bottom: 24px;
+    margin: 32px 0 24px;
     color: #f4ede8;
     font-family: 'RobotoSlab-Medium';
 `;
