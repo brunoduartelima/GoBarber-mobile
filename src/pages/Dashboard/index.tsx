@@ -42,8 +42,8 @@ const Dashboard: React.FC = () => {
     }, []);
     
     const navigateToProfile = useCallback(() => {
-        signOut();
-    }, [signOut]);
+        navigate('Profile');
+    }, [navigate]);
 
     const navigateToCreateAppointment = useCallback((providerId: string) => {
         navigate('CreateAppointment', { providerId });
@@ -51,8 +51,8 @@ const Dashboard: React.FC = () => {
 
     return (
         <Container>
+            <StatusBar backgroundColor={Platform.OS === 'android' ? "#28262e" : undefined}/>
             <Header>
-                <StatusBar backgroundColor={Platform.OS === 'android' ? "#28262e" : undefined}/>
                 <HeaderTitle>
                     Bem vindo, {"\n"}
                     <UserName>{user.name}</UserName>
