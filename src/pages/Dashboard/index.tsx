@@ -21,6 +21,7 @@ import {
     ProviderMeta,
     ProviderMetaText,
 } from './styles';
+import { Platform, StatusBar } from 'react-native';
 
 export interface Provider {
     id: string;
@@ -51,6 +52,7 @@ const Dashboard: React.FC = () => {
     return (
         <Container>
             <Header>
+                <StatusBar backgroundColor={Platform.OS === 'android' ? "#28262e" : undefined}/>
                 <HeaderTitle>
                     Bem vindo, {"\n"}
                     <UserName>{user.name}</UserName>
