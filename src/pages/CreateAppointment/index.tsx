@@ -98,10 +98,22 @@ const CreateAppointment: React.FC = () => {
             return {
                 hour,
                 available,
-                hourFormatted: format()
-            }
-        })
-    }, []);
+                hourFormatted: format(new Date().setHours(hour), 'HH:00'),
+            };
+        });
+    }, [availability]);
+
+    const afternoonAvailability = useMemo(() => {
+        return availability
+        .filter(({ hour }) => hour >= 12)
+        .map(({ hour, available }) => {
+            return {
+                hour,
+                available,
+                hourFormatted: format(new Date().setHours(hour), 'HH:00'),
+            };
+        });
+    }, [availability]);
 
     return (
         <Container>
@@ -153,6 +165,8 @@ const CreateAppointment: React.FC = () => {
                     />
                 )}
             </Calendar>
+
+            
         </Container>
     );
 };
