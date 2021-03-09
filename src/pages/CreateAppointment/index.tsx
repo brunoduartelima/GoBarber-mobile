@@ -1,7 +1,9 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/core';
 import Icon from 'react-native-vector-icons/Feather';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { Platform } from 'react-native';
+import { format } from 'date-fns';
 
 import { useAuth } from '../../hooks/auth';
 import api from '../../services/api';
@@ -22,7 +24,6 @@ import {
     OpenDatePickerButton,
     OpenDatePickerButtonText,
 } from './styles';
-import { Platform } from 'react-native';
 
 interface RouteParams {
     providerId: string;
@@ -88,6 +89,18 @@ const CreateAppointment: React.FC = () => {
 
         if(date)
             setSelectedDate(date);
+    }, []);
+
+    const monrningAvailability = useMemo(() => {
+        return availability
+        .filter(({ hour }) => hour < 12)
+        .map(({ hour, available }) => {
+            return {
+                hour,
+                available,
+                hourFormatted: format()
+            }
+        })
     }, []);
 
     return (
